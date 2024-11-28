@@ -1,0 +1,35 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+" http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+    <!-- Mapping for Ciutat -->
+    <class name="com.project.Ciutat" table="Ciutat">
+        <id name="ciutatId" column="ciutatId">
+            <generator class="native"/>
+        </id>
+
+        <property name="nom" column="nom" type="string" not-null="true"/>
+        <property name="pais" column="pais" type="string" not-null="true"/>
+        <property name="codiPostal" column="codiPostal" type="integer" not-null="true"/>
+
+        <!-- One-to-many relationship with Ciutada -->
+        <set name="ciutadans" cascade="all" fetch="eager">
+            <key column="ciutatId"/> <!-- Foreign key mapping for the relationship -->
+            <one-to-many class="com.project.Ciutada"/> <!-- One-to-many mapping to Ciutada -->
+        </set>
+    </class>
+
+    <!-- Mapping for Ciutada -->
+    <class name="com.project.Ciutada" table="Ciutada">
+        <id name="ciutadaId" type="long" column="ciutadaId">
+            <generator class="native"/>
+        </id>
+
+        <property name="ciutatId" column="ciutatId" type="long" not-null="true"/>
+        <property name="nom" column="nom" type="string" not-null="true"/>
+        <property name="cognom" column="cognom" type="string" not-null="true"/>
+        <property name="edat" column="edat" type="integer" not-null="true"/>
+    </class>
+
+</hibernate-mapping>

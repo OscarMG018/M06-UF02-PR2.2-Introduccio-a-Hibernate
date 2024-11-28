@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Main {
-   public static void main(String[] args) {
+    public static void main(String[] args) {
        // Creem el directori data si no existeix
        String basePath = System.getProperty("user.dir") + "/data/";
        File dir = new File(basePath);
@@ -16,7 +16,8 @@ public class Main {
        }
 
         // Inicialitzem la connexió amb Hibernate
-        Manager.createSessionFactory();
+        Manager.init();
+        System.out.println("\n Hibernate Initialized\n");
 
         // CREATE - Creem les ciutats
         Ciutat refCiutat1 = Manager.addCiutat("Vancouver", "Canada", 98661);
@@ -43,7 +44,7 @@ public class Main {
         ciutadansCity1.add(refCiutada3);
 
         // UPDATE - Actualitzem la primera ciutat amb els seus ciutadans
-        Manager.updateCiutat(refCiutat1.getCiutatId(), refCiutat1.getNom(), refCiutat1.getPais(), refCiutat1.getPoblacio(), ciutadansCity1);
+        Manager.updateCiutat(refCiutat1.getCiutatId(), refCiutat1.getNom(), refCiutat1.getPais(), ciutadansCity1);
 
         // Creem un set de ciutadans per la segona ciutat
         Set<Ciutada> ciutadansCity2 = new HashSet<Ciutada>();
@@ -51,7 +52,7 @@ public class Main {
         ciutadansCity2.add(refCiutada5);
 
         // UPDATE - Actualitzem la segona ciutat amb els seus ciutadans
-        Manager.updateCiutat(refCiutat2.getCiutatId(), refCiutat2.getNom(), refCiutat2.getPais(), refCiutat2.getPoblacio(), ciutadansCity2);
+        Manager.updateCiutat(refCiutat2.getCiutatId(), refCiutat2.getNom(), refCiutat2.getPais(), ciutadansCity2);
 
         // READ - Mostrem l'estat després d'assignar ciutadans a les ciutats
         System.out.println("Punt 2: Després d'actualitzar ciutats");
@@ -59,8 +60,8 @@ public class Main {
         System.out.println(Manager.collectionToString(Ciutada.class, Manager.listCollection(Ciutada.class, "")));
 
         // UPDATE - Actualitzem els noms de les ciutats
-        Manager.updateCiutat(refCiutat1.getCiutatId(), "Vancouver Updated", refCiutat1.getPais(), refCiutat1.getPoblacio(), ciutadansCity1);
-        Manager.updateCiutat(refCiutat2.getCiutatId(), "Växjö Updated", refCiutat2.getPais(), refCiutat2.getPoblacio(), ciutadansCity2);
+        Manager.updateCiutat(refCiutat1.getCiutatId(), "Vancouver Updated", refCiutat1.getPais(), ciutadansCity1);
+        Manager.updateCiutat(refCiutat2.getCiutatId(), "Växjö Updated", refCiutat2.getPais(),  ciutadansCity2);
 
         // UPDATE - Actualitzem els noms dels ciutadans
         Manager.updateCiutada(refCiutada1.getCiutadaId(), "Tony Updated", refCiutada1.getCognom(), refCiutada1.getEdat());
