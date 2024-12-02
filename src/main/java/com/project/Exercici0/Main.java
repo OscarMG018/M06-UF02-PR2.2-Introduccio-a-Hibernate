@@ -1,8 +1,9 @@
-package com.project;
+package com.project.Exercici0;
 
 import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
+import com.project.Exercici0.Manager;
 
 public class Main {
     public static void main(String[] args) {

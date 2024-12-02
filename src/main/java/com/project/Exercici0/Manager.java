@@ -1,10 +1,12 @@
-package com.project;
+package com.project.Exercici0;
 
 import java.util.Collection;
 import java.util.Set;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
@@ -13,9 +15,22 @@ public class Manager {
     private static SessionFactory factory;
 
     public static void init() {
-        factory = new Configuration()
-            .configure("hibernate.cfg.xml")
-            .buildSessionFactory();
+        try {
+            Configuration configuration = new Configuration();
+            
+            // Add the mapping resources instead of annotated classes
+            configuration.addResource("Ciutat.hbm.xml");
+            configuration.addResource("Ciutada.hbm.xml");
+
+            StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+                .applySettings(configuration.getProperties())
+                .build();
+                
+            factory = configuration.buildSessionFactory(serviceRegistry);
+        } catch (Throwable ex) { 
+            System.err.println("Failed to create sessionFactory object." + ex);
+            throw new ExceptionInInitializerError(ex); 
+        }
     }
 
     public static Ciutat addCiutat(String nom, String pais, int codipostal) {
@@ -50,7 +65,6 @@ public class Manager {
             c.setNom(nom);
             c.setPais(pais);
             c.setCiutadans(ciutadans);
-
             session.merge(c);
             session.getTransaction().commit();
         } catch (Exception e) {
@@ -130,26 +144,33 @@ public class Manager {
         }
         Session session = factory.openSession();
         try {
+            session.beginTransaction();
             Query<T> query = session.createQuery(hql, clazz);
-            return query.getResultList();
+            Collection<T> result = query.list();
+
+            if (clazz == Ciutat.class) {
+                result.forEach(city -> ((Ciutat)city).getCiutadans().size());
+            }
+            session.getTransaction().commit();
+            return result;
         } catch (Exception e) {
             e.printStackTrace();
-            session.getTransaction().rollback();
             return null;
         } finally {
             session.close();
         }
     }
 
-    public static <T> String collectionToString(Class<T> clazz, Collection<T> list) {
-        if (list == null || list.isEmpty()) {
-            return "No data available";
+    public static <T> String collectionToString(Class<? extends T> clazz, Collection<?> collection){
+        String txt = "";
+        for(Object obj: collection) {
+            T cObj = clazz.cast(obj);
+            txt += "\n" + cObj.toString();
         }
-        StringBuilder sb = new StringBuilder();
-        for (T item : list) {
-            sb.append(item.toString()).append("\n");
+        if (txt.length() > 0 && txt.substring(0, 1).compareTo("\n") == 0) {
+            txt = txt.substring(1);
         }
-        return sb.toString().trim();
+        return txt;
     }
 
     public static void close() {

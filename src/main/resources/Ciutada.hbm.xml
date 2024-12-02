@@ -1,0 +1,17 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+" http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+<!-- Mapping for Ciutada -->
+    <class name="com.project.Exercici0.Ciutada" table="Ciutada">
+        <id name="ciutadaId" type="long" column="ciutadaId">
+            <generator class="native"/>
+        </id>
+
+        <property name="ciutatId" column="ciutatId" type="long" not-null="true"/>
+        <property name="nom" column="nom" type="string" not-null="true"/>
+        <property name="cognom" column="cognom" type="string" not-null="true"/>
+        <property name="edat" column="edat" type="integer" not-null="true"/>
+    </class>
+</hibernate-mapping>
