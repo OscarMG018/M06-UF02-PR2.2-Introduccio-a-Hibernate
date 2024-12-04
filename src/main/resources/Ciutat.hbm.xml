@@ -11,7 +11,7 @@
 
         <property name="nom" column="nom" type="string" not-null="true"/>
         <property name="pais" column="pais" type="string" not-null="true"/>
-        <property name="codiPostal" column="codiPostal" type="integer" not-null="true"/>
+        <property name="codiPostal" column="codiPostal" type="string" not-null="true"/>
 
         <set name="ciutadans" table="Ciutada" inverse="true" lazy="false">
             <key column="ciutatId"/>

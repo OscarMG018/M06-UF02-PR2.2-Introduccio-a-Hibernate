@@ -32,7 +32,7 @@ public class Manager {
         }
     }
 
-    public static Ciutat addCiutat(String nom, String pais, int codipostal) {
+    public static Ciutat addCiutat(String nom, String pais, String codipostal) {
         Session session = factory.openSession();
         Ciutat c = new Ciutat();
         c.setNom(nom);

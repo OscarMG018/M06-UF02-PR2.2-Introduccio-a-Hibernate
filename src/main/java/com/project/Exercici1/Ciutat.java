@@ -27,7 +27,7 @@ public class Ciutat {
     private String pais;
 
     @Column(name = "codiPostal", nullable = false)
-    private Integer codiPostal;
+    private String codiPostal;
 
     @OneToMany(fetch = FetchType.EAGER)
     private Set<Ciutada> ciutadans;
@@ -56,11 +56,11 @@ public class Ciutat {
         this.pais = pais;
     }
 
-    public int getCodiPostal() {
+    public String getCodiPostal() {
         return codiPostal;
     }
 
-    public void setCodiPostal(int codiPostal) {
+    public void setCodiPostal(String codiPostal) {
         this.codiPostal = codiPostal;
     }
 

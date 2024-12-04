@@ -20,9 +20,9 @@ public class Main {
         System.out.println("\n Hibernate Initialized\n");
 
         // CREATE - Creem les ciutats
-        Ciutat refCiutat1 = Manager.addCiutat("Vancouver", "Canada", 98661);
-        Ciutat refCiutat2 = Manager.addCiutat("Växjö", "Suècia", 35220);
-        Ciutat refCiutat3 = Manager.addCiutat("Kyoto", "Japó", 5200461);
+        Ciutat refCiutat1 = Manager.addCiutat("Vancouver", "Canada", "98661");
+        Ciutat refCiutat2 = Manager.addCiutat("Växjö", "Suècia", "35220");
+        Ciutat refCiutat3 = Manager.addCiutat("Kyoto", "Japó", "5200461");
 
         // CREATE - Creem els ciutadans
         Ciutada refCiutada1 = Manager.addCiutada("Tony", "Happy", 20);

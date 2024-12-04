@@ -8,7 +8,7 @@ public class Ciutat {
     private long ciutatId;
     private String nom;
     private String pais;
-    private int codiPostal;
+    private String codiPostal;
     private Set<Ciutada> ciutadans = new HashSet<Ciutada>();
 
     public long getCiutatId() {
@@ -35,11 +35,11 @@ public class Ciutat {
         this.pais = pais;
     }
 
-    public int getCodiPostal() {
+    public String getCodiPostal() {
         return codiPostal;
     }
 
-    public void setCodiPostal(int codiPostal) {
+    public void setCodiPostal(String codiPostal) {
         this.codiPostal = codiPostal;
     }
 
