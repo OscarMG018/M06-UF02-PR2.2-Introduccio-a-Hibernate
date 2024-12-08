@@ -64,7 +64,12 @@ public class Manager {
 
             c.setNom(nom);
             c.setPais(pais);
-            c.setCiutadans(ciutadans);
+            c.getCiutadans().clear();
+            c.getCiutadans().addAll(ciutadans);
+            for (Ciutada ciutada : ciutadans) {
+                ciutada.setCiutatId(c.getCiutatId());
+                session.merge(ciutada);
+            }
             session.merge(c);
             session.getTransaction().commit();
         } catch (Exception e) {
